@@ -3,36 +3,74 @@
 </head>
 
 <body>
+    
+	{{> menuHeader}}
+	
+	<span class="messageBox">
+		{{#if currentUser}}
+			{{> messages}}
+			{{> input}}
+		{{/if}}
+	</span>
+</body>
+
+
+<template name="menuHeader">
     <div class="navbar navbar-static-top navbar-inverse">
-	  
   	  <div class="navbar-inner">
   		  <div class="container">
   			  <a class="brand" href="/">gitCommit.me</a>
   			  <ul class="nav pull-right">
   				  <li>
-  					  {{>loginButtons}}
+					  {{> userInfo}}
   				  </li>
   			  </ul>
   		  </div>
   	  </div>
-	  
     </div>
-	
-
-	{{> stuff}}
-	<span class="messageBox">
-		{{> messages}}
-		{{> input}}
-	</span>
-</body>
-
-<template name="stuff">
-	<p>
-		Stuff goes in here
-	</p>
 </template>
 
-<template name="messages">
+
+
+<template name="user_loggedin">
+	{{#if loggingIn}}
+		<li><a>Logging in..</a></li>
+	{{else}}
+		<li>
+			<img class="img-rounded" style="height: 32px; margin-top: 4px;" src="{{currentUser.profile.avatar_url}}">
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				{{currentUser.profile.login}}
+					<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a>Account Settings</a></li>
+				<li class="divider"></li>
+				<li><a id="logout">Logout</a></li>
+			</ul>
+		</li>
+		{{/if}}
+</template>
+
+
+<template name="user_loggedout">
+	<li><a id="login">Login with GitHub</a></li>
+</template>
+	
+
+
+<template name="userInfo">
+	<ul class="nav pull-right">
+	  {{#if currentUser}}
+	  	{{> user_loggedin}}
+	  {{else}}
+		{{> user_loggedout}}
+	  {{/if}}
+	</ul>
+</template>
+
+<template name="messages"> 
 	{{#each messages}}
 		<strong>{{name}}:</strong> {{message}}<br>
 	{{/each}}
@@ -41,3 +79,5 @@
 <template name="input">
 	<p>Chat: <input type="text" id="message"></p>
 </template>
+
+
