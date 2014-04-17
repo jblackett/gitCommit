@@ -3,8 +3,22 @@
 </head>
 
 <body>
-	{{> loginButtons}}<br>
-	<h1>gitCommit.me</h1>
+    <div class="navbar navbar-static-top navbar-inverse">
+	  
+  	  <div class="navbar-inner">
+  		  <div class="container">
+  			  <a class="brand" href="/">gitCommit.me</a>
+  			  <ul class="nav pull-right">
+  				  <li>
+  					  {{>loginButtons}}
+  				  </li>
+  			  </ul>
+  		  </div>
+  	  </div>
+	  
+    </div>
+	
+
 	{{> stuff}}
 	<span class="messageBox">
 		{{> messages}}
