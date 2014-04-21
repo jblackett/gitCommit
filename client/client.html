@@ -12,7 +12,17 @@
 			{{> input}}
 		{{/if}}
 	</span>
+	
+	{{> mainUserPicture}} <!-- Display CUrrent User's Picture -->
+	
 </body>
+
+
+<template name="mainUserPicture">
+	{{#if currentUser}}
+		<img class="img-rounded" style="height: 250px; margin-top: 4px;" src="{{currentUser.profile.avatar_url}}">
+	{{/if}}
+</template>
 
 
 <template name="menuHeader">
@@ -31,6 +41,15 @@
 </template>
 
 
+<template name="userInfo">
+	<ul class="nav pull-right">
+	  {{#if currentUser}}
+	  	{{> user_loggedin}}
+	  {{else}}
+		{{> user_loggedout}}
+	  {{/if}}
+	</ul>
+</template>
 
 <template name="user_loggedin">
 	{{#if loggingIn}}
@@ -56,18 +75,6 @@
 
 <template name="user_loggedout">
 	<li><a id="login">Login with GitHub</a></li>
-</template>
-	
-
-
-<template name="userInfo">
-	<ul class="nav pull-right">
-	  {{#if currentUser}}
-	  	{{> user_loggedin}}
-	  {{else}}
-		{{> user_loggedout}}
-	  {{/if}}
-	</ul>
 </template>
 
 <template name="messages"> 
