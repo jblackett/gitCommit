@@ -31,7 +31,7 @@ Template.user_loggedin.events({
 
 
 Template.messages.messages = function (){
-	return Messages.find({}, {sort: { time: -1}});
+	return Messages.find({}, {sort: { time: 1}});
 }
 
 Template.input.events = {
